@@ -253,7 +253,7 @@ const form = document.getElementById('regForm');
     fr.readAsArrayBuffer(file);
     fr.onload = f => {
       
-      const url = "https://script.google.com/macros/s/AKfycbwvF-pDxllSz99uwJepJz15gqhk_oXSC_a0An08qaX9IWrRhl7esVNggoYCUBjI6tQ/exec"; 
+      const url = "https://script.google.com/macros/s/AKfycbwAkvz_nJd86i8_3_zUL5gNrWsbcX6P419lmg53IfKfUfFckb3Z-do8bF29Tbzhwn0IAg/exec"; 
       
       const qs = new URLSearchParams({filename: fileName || file.name, mimeType: file.type});
       fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
