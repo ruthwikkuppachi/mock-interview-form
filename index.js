@@ -93,22 +93,23 @@ function validateForm() {
     document.getElementById("field-error").innerHTML = "";
   }
    
-  if(currentTab == 0){
+  if(currentTab == 0 && valid_blanks == true){
     valid_email = emailValidaion();
   }
 
-  if(currentTab == 1){
+  if(currentTab == 1 && valid_blanks == true){
     valid_date = dateValidation();
     valid_time = timeValidation();
     valid_radio = radioValidation();
+    valid_dateTime = dateTimeValidation();
   }
 
 
-  if(currentTab == 1){
-    if (valid_blanks && valid_email && valid_date) {
+  if(currentTab == 1 && valid_blanks == true){
+    if (valid_blanks && valid_email && valid_date && valid_dateTime) {
       document.getElementsByClassName("step")[currentTab].className += " finish";
     }
-    return (valid_blanks && valid_email && valid_date && valid_time && valid_radio);
+    return (valid_blanks && valid_email && valid_date && valid_time && valid_radio && valid_dateTime);
   }
   else{
   // If the valid status is true, mark the step as finished and valid:
@@ -263,18 +264,59 @@ const form = document.getElementById('regForm');
     }
   ;
 }
-/*function postSubmit(){
-  const form = document.getElementById('regForm');
-    const data = new FormData(form);
-    const action = e.target.action;
-    fetch(action, {
-      method: 'POST',
-      body: data,
-    })
-    .then(() => {
-      alert("Success!");
-    })
-  };
+function dateTimeValidation(){
+  var valid_1, valid_2, valid_3 = true;
+ 
+  var time1 = document.getElementById('slot1time').value;
+  var time2 = document.getElementById('slot2time').value;
+  var time3 = document.getElementById('slot3time').value;
 
+  var date1 = document.getElementById('slot1date').value;
+  var date2 = document.getElementById('slot2date').value;
+  var date3 = document.getElementById('slot3date').value;
 
-*/
+  timeComparison(time1, time2);
+
+  if((date1 == date2) && (timeComparison(time1, time2))){
+    alert("Slot 1 and Slot 2 are within 30 minutes of each other. Please provide another time for one of the slots.")
+    valid_1 = false;
+  }
+  else{
+    valid_1 = true;
+  }
+
+  if((date2 == date3) && (timeComparison(time2, time3))){
+    alert("Slot 2 and Slot 3 are within 30 minutes of each other. Please provide another time for one of the slots.")
+    valid_2 = false;
+  }
+  else{
+    valid_2 = true;
+  }
+  
+  if((date1 == date3) && (timeComparison(time1, time3))){
+    alert("Slot 1 and Slot 3 are within 30 minutes of each other. Please provide another time for one of the slots.")
+    valid_3 = false;
+  }
+  else{
+    valid_3 = true;
+  }
+ 
+  return (valid_1 && valid_2 && valid_3); // return the valid status*/
+
+}
+
+function timeComparison(t1, t2){
+  t1 = t1.replace(':', '');
+  t2 = t2.replace(':', '');
+  if(t1.slice(0,2) != t2.slice(0,2)){
+    if(Math.abs(parseInt(t1)-parseInt(t2)) < 70){
+      return true;
+    }
+    else{return false;}}
+  else{
+    if(Math.abs(parseInt(t1)-parseInt(t2)) < 30){
+      return true;
+    }
+    else{return false;}
+  }
+}

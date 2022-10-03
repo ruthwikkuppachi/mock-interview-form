@@ -38,12 +38,12 @@
   }
   
   button {
-    background-color: #04AA6D;
+    background-color: #754ff4;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 17px;
-    font-family: Monsterrat;
+    font-family: Roboto;
     cursor: pointer;
   }
   
@@ -73,7 +73,7 @@
   
   /* Mark the steps that are finished and valid: */
   .step.finish {
-    background-color: #04AA6D;
+    background-color: #6e00c8;
   }
 
   #section{
@@ -87,3 +87,8 @@
   .errors{
     color:red;
    }
+  
+  fieldset {
+    padding: 30px;
+    background-color: #eeeeee;
+  }
