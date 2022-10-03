@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Monsterrat" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<body>
+<form id="regForm" action="/">
+  <h1>INST490 Mock Interview Scheduling Request</h1>
+  <hr>
+          <h2> Instructions </h2>
+          <p>
+            Use this form to complete assignment PD03a Sign up for Mock Interview.
+            You must complete this form by Thursday Oct 6 to earn credit for PD03a <b>and</b> PD03b. <br><br>
+
+            You <b>must</b> provide 3 dates/times that you will be available for the interview.
+            You must hold all 3 of these times until your appointment time is confirmed.
+            Do not schedule anything else during these times. <br><br>
+
+            You may <b>optionally</b> request a waiver, if you have completed an InfoSci-relevant interview for a
+            job or internship within the past year. <br><br>
+
+            You will receive an email to confirm the interview time and the decision on any waiver request. <br><br>
+  <hr>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab"><h3>Personal Details</h3>
+    <label for="fname">First Name:</label>
+    <p><input placeholder="First Name" class = "normalInput" name="FirstName"></p>
+    <label for="lname">Last Name:</label>
+    <p><input placeholder="Last Name" class = "normalInput" name="LastName"></p>
+    <label for="email">Email:</label>
+    <p><input id="email" class = "normalInput" placeholder="Your email" name="Email"/></p>
+    <div  id="email-error" class="errors"></div>
+    <p><label for="section">Which INST490 section are you in?</label></p>
+    <select name="Section" id="section">
+        <option value="Andrew Fellows">0101 - Andrew Fellows (TuTh 12:30pm - 1:45pm)</option>
+        <option value="Mary Ann Francis">0102 - Mary Ann Francis (MW 4:00pm - 5:15pm)</option>
+        <option value="Bill Kules">0103 - Bill Kules (W 2:00pm - 4:45pm)</option>
+        <option value="Timothy Rainsford">0104 - Timothy Rainsford (Th 6:00pm - 8:45pm)</option>
+      </select>
+  </div><br>
+  <div class="tab"><h3>Mock Interview Time Slots</h3>
+    <p>In this section, specify 3 day/time slots when you are available for an interview.
+        YOU MUST BLOCK ALL 3 SLOTS on your calendar until you have a confirmed interview slot.
+        If you miss a scheduled interview appointment, you will receive a 0 grade for Assignment PD03b.
+        <br><br>
+        The acceptable times and dates are 9:00am-8:30pm, Oct 31-Nov 13.
+        You are responsible for entering valid dates (Google does not check this).
+        If you enter it wrong you may not get an interview or earn credit for PD03a or PD03b.
+        <br><br>
+        Once we match you with an interviewer, we will send a Google Calendar invitation to the
+        email address you used for this form.</p>
+    
+    <label for="slot1date">Slot 1 Date</label>    
+    <p><input type="date" id="slot1date" class = "normalInput" name="Slot 1 Date"></p>
+    <div id="date1-error" class = "errors"></div>
+    <label for="slot1time">Slot 1 Time</label>   
+    <p><input type="time" id="slot1time" class = "normalInput" name="Slot 1 Time"></p>
+    
+    <label for="slot2date">Slot 2 Date</label>   
+    <p><input type="date" id="slot2date" class = "normalInput" name="Slot 2 Date"></p>
+    <div id="date2-error" class = "errors"></div>
+    <label for="slot2time">Slot 2 Time</label> 
+    <p><input type="time" id="slot2time" class = "normalInput" name="Slot 2 Time"></p>
+    <label for="slot3date">Slot 3 Date</label>   
+    <p><input type="date" id="slot3date" class = "normalInput" name="Slot 3 Date"></p>
+    <div id="date3-error" class = "errors"></div>
+    <label for="slot3time">Slot 3 Time</label> 
+    <p><input type="time" id="slot3time" class = "normalInput" name="Slot 3 Time"></p>
+    <p>By selecting these three times, you guarantee that if an interviewer books
+         a slot with you, you will appear on time. If an emergency causes you to miss an interview, you will contact
+        the interviewer in advance to reschedule or receive a grade of 0 on PD03b.
+    </p>
+    <input type="radio" id="acknowledgement" value="I acknowledge" class = "radio" name="Acknowledgement">
+    <label for="acknowledgement">I acknowledge</label>
+    
+    <p>Are you requesting a waiver based on a previous professional interview?</p>
+    <input type="radio" id="waiver-yes" value="Yes" name="Waiver?">
+    <label for="waiver-yes">Yes</label>
+    <input type="radio" id="waiver-no" value="No" name="Waiver?">
+    <label for="waiver-no">No</label>
+  </div>
+  <div class="tab"><h3>Interview Waiver</h3>
+    <p id = "waiver-intro-text">
+    </p>
+    <div id = "waiver-details">
+    <label for="org-name">Provide the organization name and job title</label>
+    <p><input id = "org-name" class = "normalInput" name="Organization Name and Title"></p>
+
+    <label for="job-desc">Provide a 1-sentence description of the job you interviewed for.</label>
+    <p><input id = "job-desc" class = "normalInput" name="Job Description"></p>
+
+    <p>Upload a document to verify this. You must submit a document verifying that you recently
+        (within the past year) had an interview for a professional role (internship or job).
+        Examples of verification could include uploading a screenshot of an email confirming an interview date
+        and time or an email confirming the recent internship experience you had. Interviews for positions such
+        as sales associate, restaurant worker, childcare provider, etc. will not be accepted as a substitute for the
+        mock interview exercise.</p>
+    
+    <input type="file" id="waiverFile" name="File URL">
+</div>
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1);">Next</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+<script src="index.js"></script>
+</body>
+</html>
