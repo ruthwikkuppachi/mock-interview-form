@@ -44,14 +44,14 @@ function nextPrev(n) {
   currentTab = currentTab + n;
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
-    document.getElementById("loader").innerHTML = "Your response is being saved. Please don't refresh the page."
-    document.getElementById("loader").style.display = "block";
+    console.log("No tabs left")
     var waiverNo = document.getElementById("waiver-no");
     // ... the form gets submitted:
     if(!waiverNo.checked){
-    submitFile();
-    }
-    const timeout = setTimeout(submitData, 5000);
+      console.log("submit");
+      submitFile()
+     }
+    document.getElementById("regForm").submit();
     return false;
   }
   // Otherwise, display the correct tab:
@@ -248,23 +248,21 @@ var emailText = document.getElementById("email-error");
 
 function submitFile(){
 const form = document.getElementById('regForm');
-  var firstName = document.getElementById("fname").value;
-  var lastName = document.getElementById("lname").value;
-  var fileName = firstName + "_" + lastName + "_" + "Waiver_Evidence";
     const file = form.waiverFile.files[0];
     const fr = new FileReader();
     fr.readAsArrayBuffer(file);
-    fr.onload = f => {
-      
-      const url = "https://script.google.com/macros/s/AKfycbwAkvz_nJd86i8_3_zUL5gNrWsbcX6P419lmg53IfKfUfFckb3Z-do8bF29Tbzhwn0IAg/exec";
-      
-      const qs = new URLSearchParams({filename: fileName || file.name, mimeType: file.type});
-      fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
-      .then(res => res.json())
-      .then(e => console.log(e))  // <--- You can retrieve the returned value here.
-      .catch(err => console.log(err));
-    }
-  ;
+    fr.onload = uploadFile();
+}
+async function uploadFile(){
+  const form = document.getElementById('regForm');
+  var firstName = document.getElementById("fname").value;
+  var lastName = document.getElementById("lname").value;
+  var fileName = firstName + "_" + lastName + "_" + "Waiver_Evidence";
+  const url = "https://script.google.com/macros/s/AKfycbwJeIiZtmIZ-06ujjBqmF-Ie-7lNFh93heS1Qmzfyko-AVHcw/exec"; 
+  const qs = new URLSearchParams({filename: fileName || file.name, mimeType: file.type});
+  const request = await fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
+  console.log(request);
+  return request;
 }
 function dateTimeValidation(){
   var valid_1, valid_2, valid_3 = true;
@@ -321,7 +319,4 @@ function timeComparison(t1, t2){
     }
     else{return false;}
   }
-}
-function submitData(){
-  document.getElementById("regForm").submit();
 }
